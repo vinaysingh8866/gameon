@@ -13,12 +13,13 @@ contract GameOnNFT is ERC721, ERC721URIStorage, Ownable {
 
     constructor() ERC721("GameOn", "GON") {}
 
-    uint public constant MAX_TOKENS = 10000;
-    uint public constant MAX_MINT = 20;
-    uint public constant PRICE = 0.05 ether;
+    uint public constant MAX_TOKENS = 10;
+    uint public constant MAX_MINT = 1;
+    uint public constant PRICE = 0.1 ether;
 
     function safeMint(address to, string memory uri) public payable {
         require(totalSupply() < MAX_TOKENS, "Sale has already ended");
+        require(msg.value >= PRICE, "Ether value sent is not correct");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(to, tokenId);
@@ -41,5 +42,10 @@ contract GameOnNFT is ERC721, ERC721URIStorage, Ownable {
         uint256 tokenId
     ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
+    }
+
+    function withdraw() public onlyOwner {
+        uint balance = address(this).balance;
+        payable(msg.sender).transfer(balance);
     }
 }

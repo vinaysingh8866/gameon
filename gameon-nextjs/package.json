@@ -1,0 +1,46 @@
+{
+  "name": "gameon-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@expo/next-adapter": "^5.0.2",
+    "@native-base/icons": "^0.0.11",
+    "@native-base/next-adapter": "^2.3.0",
+    "@walletconnect/client": "^1.8.0",
+    "@web3auth/base": "^5.0.1",
+    "@web3auth/metamask-adapter": "^5.0.1",
+    "@web3auth/modal": "^5.0.1",
+    "@web3auth/torus-evm-adapter": "^5.0.1",
+    "@web3auth/torus-wallet-connector-plugin": "^5.0.1",
+    "@web3auth/wallet-connect-v1-adapter": "^5.0.1",
+    "alchemy-sdk": "^2.6.1",
+    "ethers": "^5.7.2",
+    "i18n": "^0.15.1",
+    "native-base": "^3.4.28",
+    "next": "latest",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^10.0.0",
+    "react": "18",
+    "react-dom": "18",
+    "react-native": "latest",
+    "react-native-safe-area-context": "^4.0.0",
+    "react-native-svg": "12.1.1",
+    "react-native-web": "^0.18.12",
+    "web3": "^1.8.2"
+  },
+  "devDependencies": {
+    "@types/elliptic": "^6.4.14",
+    "@types/node": "18",
+    "@types/react": "18",
+    "@types/react-dom": "18",
+    "eslint": "8.25.0",
+    "eslint-config-next": "12.3.1",
+    "typescript": "4.8.4"
+  }
+}

@@ -13,10 +13,20 @@ export default class EthereumRpc {
   async getTotalSupply(): Promise<any> {
     try {
       const ethersProvider = new ethers.providers.Web3Provider(this.provider);
-      const signer = ethersProvider.getSigner();
-      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
       const totalSupply = await contract.totalSupply();
       return totalSupply;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getMaxSupply(): Promise<any> {
+    try {
+      const ethersProvider = new ethers.providers.Web3Provider(this.provider);
+      const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
+      const maxSupply = await contract.MAX_TOKENS();
+      return maxSupply;
     } catch (error) {
       return error;
     }
@@ -25,16 +35,23 @@ export default class EthereumRpc {
   async mintNFT(url: any): Promise<any> {
     try {
       const address = await this.getAccounts();
+      console.log("address: ", address);
       const ethersProvider = new ethers.providers.Web3Provider(this.provider);
       const signer = ethersProvider.getSigner();
       const contract = new ethers.Contract(contractAddress, abi, signer);
+      console.log("contract: ", contract);
+      console.log("url: ", url);
+      const balance = await this.getBalance();
+      console.log("balance: ", balance);
       const tx = await contract.safeMint(address, url, {
         value: ethers.utils.parseEther("0.1")
       });
+
       console.log("tx: ", tx);
       const receipt = await tx.wait();
       return receipt;
     } catch (error) {
+      console.log("error: ", error);
       return error;
     }
   }
@@ -42,8 +59,7 @@ export default class EthereumRpc {
   async getPrice(): Promise<any> {
     try {
       const ethersProvider = new ethers.providers.Web3Provider(this.provider);
-      const signer = ethersProvider.getSigner();
-      const contract = new ethers.Contract(contractAddress, abi, signer);
+      const contract = new ethers.Contract(contractAddress, abi, ethersProvider);
       const price = await contract.PRICE();
       const priceInEth = await this.convertToEthFromWei(price);
       return priceInEth;

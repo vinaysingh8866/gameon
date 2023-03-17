@@ -1,5 +1,5 @@
 import { Button, HStack, Image, VStack } from "native-base";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SelectImage = ({ setJsonUrl }: any) => {
   const images = [
@@ -18,12 +18,16 @@ const SelectImage = ({ setJsonUrl }: any) => {
   ];
   const [index, setIndex] = useState(0);
   const [image, setImage] = useState(images[index]);
+  useEffect(() => {
+    setJsonUrl(jsons[index]);
+    setImage(images[index]);
+  }, [index]);
   return (
-    <VStack mx="auto">
-      <HStack
-        space="1"
-        w="60%"
-        bg="#B5D3E8"
+    <HStack mr="48" justifyContent={"space-between"} w="40%">
+      <VStack
+        
+        h="70%"
+        overflowY={"scroll"}
         rounded="2xl"
         justifyContent={"space-evenly"}
         mx="auto"
@@ -31,9 +35,8 @@ const SelectImage = ({ setJsonUrl }: any) => {
       >
         {images.map((image, index) => (
           <Button
-            w="24"
-            h="24"
-            p="0"
+            w="20"
+            h="20"
             bg="transparent"
             _hover={{ bg: "transparent" }}
             _pressed={{ bg: "transparent" }}
@@ -41,13 +44,14 @@ const SelectImage = ({ setJsonUrl }: any) => {
               setJsonUrl(jsons[index]);
               setImage(image);
             }}
+            key={index}
           >
-            <Image key={index} src={image} w="20" h="20" rounded={"xl"} />
+            <Image key={index} src={image} w="16" h="16" rounded={"xl"} />
           </Button>
         ))}
-      </HStack>
-      <Image src={image} w="64" h="64" rounded={"xl"} m="auto" />
-    </VStack>
+      </VStack>
+      <Image src={image} w="80" h="80" rounded={"xl"} my="auto" />
+    </HStack>
   );
 };
 

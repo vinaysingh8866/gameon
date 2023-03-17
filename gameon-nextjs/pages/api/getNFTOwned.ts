@@ -6,7 +6,7 @@ type Data = {
   nfts: any;
 };
 const settings = {
-  apiKey: "d8VdYbXoAYnZ2KBTKV0woib4ckw3aJx5",
+  apiKey: process.env.ALCHEMY_KEY as string,
   network: Network.MATIC_MUMBAI,
 };
 

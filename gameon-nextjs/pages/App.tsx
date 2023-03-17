@@ -14,9 +14,18 @@ function App() {
   const [txId, setTxId] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [balance, setBalance] = useState<string>("");
   useEffect(() => {}, []);
 
-  useEffect(() => {}, [web3auth, provider, jsonUrl, txId, loading]);
+  useEffect(() => {
+    //get balance
+    const init = async () => {
+      const rpc = new RPC(provider);
+      const balance = await rpc.getBalance();
+      // convert to ETH and set balance
+      setBalance(balance);
+    }
+  }, [web3auth, provider, jsonUrl, txId, loading]);
 
   const mintNFT = async () => {
     setLoading(true);
@@ -55,6 +64,9 @@ function App() {
         >
           <SelectImage setJsonUrl={setJsonUrl} />
           <VStack h="24" my="auto" space="4">
+            {(Number(balance) <= 0.1) ? (
+              <Text color="white">You need at least 0.1 MATIC to mint NFT</Text>
+            ) : <Text color="white">Your balance:{balance}</Text>}
             <Button
               onPress={mintNFT}
               mx="auto"
@@ -63,6 +75,7 @@ function App() {
               w="40"
               my="auto"
               isLoading={loading}
+              disabled={loading || Number(balance) <= 0.1}
             >
               <Text color="white" px="2">
                 Mint NFT 0.1 MATIC

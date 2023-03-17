@@ -1,6 +1,7 @@
 import { Button, HStack, Text } from "native-base";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import colors from "../../colors";
 import { useAuth } from "../../context/AuthContext";
 
 const NavBar = () => {
@@ -10,7 +11,7 @@ const NavBar = () => {
   useEffect(() => {}, [provider, web3auth]);
 
   return (
-    <HStack w="100%" bg="black" h="16" justifyContent={"space-around"}>
+    <HStack w="100%" bg={colors.primary} h="16" justifyContent={"space-around"}>
       <NavBarButton
         onPress={() => {
           router.push("/");
@@ -45,7 +46,6 @@ const NavBar = () => {
             }
             const web3authProvider = await web3auth.connect();
             setProvider(web3authProvider);
-            router.push("/nft");
           }}
           text="Login"
         />

@@ -4,6 +4,10 @@
 NFT miniting website with web3auth and next.js
 
 
+## Demo
+
+https://drive.google.com/file/d/1UwBJOYGzfJUjPaCRXkXZofr1XdTziuGq/view?usp=sharing
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
